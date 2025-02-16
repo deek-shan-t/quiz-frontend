@@ -8,9 +8,10 @@ interface QuizProps {
   winners: string[];
   finalists: string[];
   participants: string[];
+  quiz_link: string;
 }
 
-const QuizItem = ({ title, date, winners, finalists, participants }: QuizProps) => {
+const QuizItem = ({ title, date, winners, finalists, participants, quiz_link }: QuizProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -39,6 +40,18 @@ const QuizItem = ({ title, date, winners, finalists, participants }: QuizProps) 
               <li key={index}>{participant}</li>
             ))}
           </ul>
+          {quiz_link && (
+            <div className="mt-4">
+              <a 
+                href={quiz_link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-blue-600 hover:underline text-sm"
+              >
+                View Quiz Details
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>

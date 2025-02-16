@@ -10,6 +10,7 @@ interface Quiz {
   winners: string[];
   finalists: string[];
   participants: string[];
+  quiz_link: string;
 }
 
 const PastQuizzes = () => {
@@ -42,6 +43,7 @@ const PastQuizzes = () => {
             winners={quiz.winners}
             finalists={quiz.finalists}
             participants={quiz.participants}
+            quiz_link={quiz.quiz_link}
           />
         ))
       ) : (
