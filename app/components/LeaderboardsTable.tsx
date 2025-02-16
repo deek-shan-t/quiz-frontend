@@ -3,15 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config";
 
-interface Leaderboard {
-  id: number;
-  quiz_name: string;
-  quiz_date: string;
-  mordor: number;
-  rivendell: number;
-  helmsdeep: number;
-  edoras: number;
-}
 
 const LeaderboardsTable = () => {
   const [leaderboards, setLeaderboards] = useState([]);
