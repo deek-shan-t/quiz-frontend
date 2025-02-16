@@ -12,7 +12,7 @@ interface LeaderboardEntry {
   rivendell: number;
   helmsdeep: number;
   edoras: number;
-  quiz_date?: typeof Date;
+  quiz_date?: string;
 }
 
 const LeaderboardChart = () => {
@@ -25,7 +25,9 @@ const LeaderboardChart = () => {
         const data: LeaderboardEntry[] = await res.json();
 
         // Sort quizzes by date (ascending)
-        data.sort((a, b) => new Date(a.quiz_date).getTime() - new Date(b.quiz_date).getTime());
+        data.sort((a, b) =>
+          new Date(a.quiz_date || 0).getTime() - new Date(b.quiz_date || 0).getTime()
+        );
 
         // Initialize cumulative sums
         const cumulative = {
@@ -38,11 +40,12 @@ const LeaderboardChart = () => {
         // Start with an initial zero-value entry for the graph origin
         const cumulativeData: LeaderboardEntry[] = [
           {
-            quiz_name: "Start", // This will appear at the beginning of X-axis
+            quiz_name: "", // This will appear at the beginning of X-axis
             mordor: 0,
             rivendell: 0,
             helmsdeep: 0,
             edoras: 0,
+            quiz_date: "1970-01-01",
           },
           ...data.map((quiz) => {
             cumulative.mordor += quiz.mordor;
@@ -53,6 +56,7 @@ const LeaderboardChart = () => {
             return {
               quiz_name: quiz.quiz_name, // X-axis label
               ...cumulative, // Store cumulative totals
+              quiz_date: quiz.quiz_date, // For sorting
             };
           }),
         ];
