@@ -1,4 +1,4 @@
 export const API_BASE_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://apiv.prometeo.in";
+    : "https://quiz-backend.up.railway.app";
