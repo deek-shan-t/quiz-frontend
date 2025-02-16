@@ -62,7 +62,7 @@ const LeaderboardsTable = () => {
               ))
           ) : (
             <tr>
-              <td colSpan="6" className="p-3 text-center border">
+              <td colSpan={6} className="p-3 text-center border">
                 No data available
               </td>
             </tr>
