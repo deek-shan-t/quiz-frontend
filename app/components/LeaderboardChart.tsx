@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { API_BASE_URL } from "../config";
 
 const LeaderboardChart = () => {
   const [leaderboards, setLeaderboards] = useState([]);
@@ -10,7 +11,7 @@ const LeaderboardChart = () => {
   useEffect(() => {
     const fetchLeaderboards = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/leaderboard");
+        const res = await fetch(`${API_BASE_URL}/api/leaderboard`);
         let data = await res.json();
   
         // Sort quizzes by date (ascending)

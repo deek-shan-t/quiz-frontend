@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config";
 
 interface Quiz {
   id: number;
@@ -19,7 +20,7 @@ const UpcomingQuizzes = () => {
 
   const fetchQuizzes = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/upcoming_quizzes");
+      const res = await fetch(`${API_BASE_URL}/api/upcoming_quizzes`);
       if (!res.ok) throw new Error("Failed to fetch quizzes");
       const data = await res.json();
       setQuizzes(data);

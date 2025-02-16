@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config";
 
 interface Leaderboard {
   id: number;
@@ -18,7 +19,7 @@ const LeaderboardsTable = () => {
   useEffect(() => {
     const fetchLeaderboards = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/leaderboard"); // Relative URL for better deployment compatibility
+        const res = await fetch(`${API_BASE_URL}/api/leaderboard`);
         const data = await res.json();
         setLeaderboards(data);
         console.log("Leaderboards fetched:", res, data);
