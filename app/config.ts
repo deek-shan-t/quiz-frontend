@@ -1,4 +1,1 @@
-export const API_BASE_URL =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://quiz-backend.up.railway.app";
+export const API_BASE_URL = "https://quiz-backend-production-f994.up.railway.app";
