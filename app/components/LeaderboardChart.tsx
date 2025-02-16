@@ -12,13 +12,25 @@ const LeaderboardChart = () => {
     const fetchLeaderboards = async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/api/leaderboard`);
-        let data = await res.json();
+        const data = await res.json();
   
         // Sort quizzes by date (ascending)
-        data.sort((a: any, b: any) => new Date(a.quiz_date).getTime() - new Date(b.quiz_date).getTime());
+        interface Quiz {
+          quiz_name: string;
+          quiz_date: string;
+          mordor: number;
+          rivendell: number;
+          helmsdeep: number;
+          edoras: number;
+        }
+        
+        const data: Quiz[] = await res.json();
+        
+        data.sort((a, b) => new Date(a.quiz_date).getTime() - new Date(b.quiz_date).getTime());
+        
   
         // Initialize cumulative sums
-        let cumulative = {
+        const cumulative = {
           mordor: 0,
           rivendell: 0,
           helmsdeep: 0,
@@ -34,7 +46,7 @@ const LeaderboardChart = () => {
             helmsdeep: 0,
             edoras: 0,
           },
-          ...data.map((quiz: any) => {
+          ...data.map((quiz: Quiz) => {
             cumulative.mordor += quiz.mordor;
             cumulative.rivendell += quiz.rivendell;
             cumulative.helmsdeep += quiz.helmsdeep;
