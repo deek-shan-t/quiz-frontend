@@ -5,7 +5,17 @@ import { API_BASE_URL } from "../config";
 
 
 const LeaderboardsTable = () => {
-  const [leaderboards, setLeaderboards] = useState([]);
+  interface LeaderboardEntry {
+    id: number;
+    quiz_name: string;
+    quiz_date: string;
+    mordor: number;
+    rivendell: number;
+    helmsdeep: number;
+    edoras: number;
+  }
+  
+  const [leaderboards, setLeaderboards] = useState<LeaderboardEntry[]>([]);
 
   useEffect(() => {
     const fetchLeaderboards = async () => {
@@ -39,8 +49,8 @@ const LeaderboardsTable = () => {
         <tbody>
           {leaderboards.length > 0 ? (
             leaderboards
-              .sort((a, b) => b.Mordor - a.Mordor) // Sort dynamically in case API changes
-              .map((quiz) => (
+                .sort((a, b) => b.mordor - a.mordor) // Sort dynamically in case API changes
+              .map((quiz: LeaderboardEntry) => (
                 <tr key={quiz.id} className="text-center border-b text-gray-100">
                   <td className="p-3 border">{quiz.quiz_name}</td>
                   <td className="p-3 border">{new Date(quiz.quiz_date).toLocaleDateString()}</td>
