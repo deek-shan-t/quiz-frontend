@@ -5,28 +5,38 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { API_BASE_URL } from "../config";
 
+// Define types for leaderboard data
+interface LeaderboardEntry {
+  quiz_name: string;
+  mordor: number;
+  rivendell: number;
+  helmsdeep: number;
+  edoras: number;
+  quiz_date?: typeof Date;
+}
+
 const LeaderboardChart = () => {
-  const [leaderboards, setLeaderboards] = useState([]);
+  const [leaderboards, setLeaderboards] = useState<LeaderboardEntry[]>([]);
 
   useEffect(() => {
     const fetchLeaderboards = async () => {
       try {
         const res = await fetch(`${API_BASE_URL}/api/leaderboard`);
-        const data = await res.json();
-  
+        const data: LeaderboardEntry[] = await res.json();
+
         // Sort quizzes by date (ascending)
-        data.sort((a: any, b: any) => new Date(a.quiz_date).getTime() - new Date(b.quiz_date).getTime());
-  
+        data.sort((a, b) => new Date(a.quiz_date).getTime() - new Date(b.quiz_date).getTime());
+
         // Initialize cumulative sums
-        let cumulative = {
+        const cumulative = {
           mordor: 0,
           rivendell: 0,
           helmsdeep: 0,
           edoras: 0,
         };
-  
+
         // Start with an initial zero-value entry for the graph origin
-        const cumulativeData = [
+        const cumulativeData: LeaderboardEntry[] = [
           {
             quiz_name: "Start", // This will appear at the beginning of X-axis
             mordor: 0,
@@ -34,30 +44,28 @@ const LeaderboardChart = () => {
             helmsdeep: 0,
             edoras: 0,
           },
-          ...data.map((quiz: any) => {
+          ...data.map((quiz) => {
             cumulative.mordor += quiz.mordor;
             cumulative.rivendell += quiz.rivendell;
             cumulative.helmsdeep += quiz.helmsdeep;
             cumulative.edoras += quiz.edoras;
-  
+
             return {
               quiz_name: quiz.quiz_name, // X-axis label
               ...cumulative, // Store cumulative totals
             };
           }),
         ];
-  
+
         setLeaderboards(cumulativeData);
         console.log("Cumulative Leaderboards:", cumulativeData);
       } catch (error) {
         console.error("Error fetching leaderboards:", error);
       }
     };
-  
+
     fetchLeaderboards();
   }, []);
-  
-  
 
   return (
     <Card className="col-span-1">
