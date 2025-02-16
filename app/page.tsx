@@ -6,15 +6,16 @@ import LeaderboardChart from "@/app/components/LeaderboardChart";
 export default function QuizSocietyLanding() {
   return (
     <div className="flex min-h-screen justify-center items-center bg-gray-900 p-6 font-fredoka">
-      <div className="bg-gray-900 w-full max-w-6xl h-[700px] p-4 flex flex-col">
+      <div className="bg-gray-900 w-full max-w-6xl h-auto p-4 flex flex-col">
         {/* Title */}
-        <h1 className="text-4xl font-bold text-center mb-8 text-blue-700">
+        <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-blue-700">
           Quiz Club IIT Jodhpur
         </h1>
 
-        <div className="flex flex-1 space-x-2">
+        {/* Responsive Layout */}
+        <div className="flex flex-col md:flex-row flex-1 space-y-4 md:space-y-0 md:space-x-4">
           {/* Left Column */}
-          <div className="flex flex-col flex-[2] space-y-2">
+          <div className="flex flex-col flex-[2] space-y-4">
             {/* Welcome Section */}
             <Card className="flex-1">
               <CardHeader>
@@ -34,26 +35,34 @@ export default function QuizSocietyLanding() {
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col flex-[1] space-y-2">
-            {/* Person of Interest */}
+          <div className="flex flex-col flex-[1] space-y-4">
+            {/* Featured Member */}
             <Card className="flex-[7]">
               <CardHeader>
                 <CardTitle>Featured Member</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">Contact info, achievements, or any highlight here.</p>
+                <p className="text-muted-foreground">
+                  Contact info, achievements, or any highlight here.
+                </p>
               </CardContent>
             </Card>
 
             {/* Navigation Buttons */}
             <Link href="/past_quizzes" className="flex-[1.1]">
-              <Button className="w-full h-full" variant="secondary">Past Quizzes</Button>
+              <Button className="w-full h-full" variant="secondary">
+                Past Quizzes
+              </Button>
             </Link>
             <Link href="/upcoming_quizzes" className="flex-[1.1]">
-              <Button className="w-full h-full" variant="secondary">Upcoming Quizzes</Button>
+              <Button className="w-full h-full" variant="secondary">
+                Upcoming Quizzes
+              </Button>
             </Link>
             <Link href="/leaderboards" className="flex-[1.1]">
-              <Button className="w-full h-full" variant="secondary">Leaderboards</Button>
+              <Button className="w-full h-full" variant="secondary">
+                Leaderboards
+              </Button>
             </Link>
           </div>
         </div>
