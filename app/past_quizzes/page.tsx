@@ -1,6 +1,6 @@
 import React from "react";
 import PastQuizzes from "./PastQuizzes";
-import Link from "next/link";
+// import Link from "next/link";
 
 const QuizzesPage = () => {
   return (
